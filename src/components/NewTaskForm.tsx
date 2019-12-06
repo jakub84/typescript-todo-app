@@ -18,19 +18,31 @@ const ButtonSubmit = styled.button`
   color: white;
 `;
 
+const ButtonReset = styled.button`
+  padding:20px;
+  border: 1px solid lightcoral;
+  border-radius: 10px;
+  background-color: lightcoral;
+  color: white;
+  margin-left: 20px;
+`;
+
 interface Props {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onAdd: (event: React.FormEvent<HTMLFormElement>) => void;
+  onReset: (event: any) => void;
   task: Task;
 }
 
 export const NewTaskForm: FunctionComponent<Props> = ({
   onChange,
   onAdd,
+  onReset,
   task
 }) => (
     <form onSubmit={onAdd}>
       <InputData onChange={onChange} value={task.name} />
       <ButtonSubmit type='submit'>Add a task</ButtonSubmit>
+      <ButtonReset onClick={onReset}>Reset</ButtonReset>
     </form>
   );

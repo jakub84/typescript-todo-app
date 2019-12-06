@@ -29,6 +29,22 @@ class App extends Component<{}, State> {
     }));
   }
 
+  handleResetTasks = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    this.setState({
+      newTask: {
+        id: 1,
+        name: ''
+      },
+      tasks: []
+    });
+  }
+
+  handleDelete = (id: number) => {
+    // tslint:disable-next-line:no-console
+    console.log(id);
+  }
+
   handleTaskChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       newTask: {
@@ -39,15 +55,22 @@ class App extends Component<{}, State> {
   }
 
   render() {
+    const { tasks, newTask } = this.state;
     return (
       <Wrapper>
-        <h2>Hello React TS!</h2>
+        <h2>TypeScript</h2>
         <NewTaskForm
-          task={this.state.newTask}
+          task={newTask}
           onAdd={this.addTask}
           onChange={this.handleTaskChange}
+          onReset={this.handleResetTasks}
         />
-        <TaskList tasks={this.state.tasks} />
+        {tasks.length !== 0 ?
+        <TaskList tasks={tasks}
+        onDelete={this.handleDelete(selectedTask)}
+        />
+        :
+        <p>no data yet</p>}
       </Wrapper>
     );
   }

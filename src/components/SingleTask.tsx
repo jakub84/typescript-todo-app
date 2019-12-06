@@ -20,11 +20,13 @@ background-color: ${props => props.colored ? '#F4FFF5' : '#F4F4FF' };
 
 interface Props {
   task: Task;
+  onDelete: (selectedTask: number) => void;
+  selectedTask: number;
 }
 
-export const SingleTask: FunctionComponent<Props> = ({ task }) => (
+export const SingleTask: FunctionComponent<Props> = ({ task, onDelete, selectedTask }) => (
 
-  <SlingleTaskWrapper colored={task.id % 2 === 0}>
+  <SlingleTaskWrapper onClick={() => onDelete(selectedTask)} colored={task.id % 2 === 0}>
     {task.name}
   </SlingleTaskWrapper>
 );
